@@ -2,15 +2,17 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: db-job
+  namespace: projet-groupe
 spec:
   template:
     metadata:
       name: db-job
+      namespace: projet-groupe
     spec:
       containers:
       - name: db-container
         image: busybox
-        command: ["sh", "-c", "echo 'Message écrit à l'éxécution du Job' > /data/message.txt"]
+        command: ["sh", "-c", "echo \"Message écrit à l'éxécution du Job\" > /data/message.txt"]
         volumeMounts:
         - mountPath: /data
           name: db-volume
