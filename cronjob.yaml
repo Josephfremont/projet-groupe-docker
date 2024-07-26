@@ -13,9 +13,12 @@ spec:
           namespace: projet-groupe
         spec:
           containers:
-          - name: db-container
-            image: busybox
-            command: ["sh", "-c", "echo \"Message écrit à l'éxécution du Job\" > /data/message.txt"]
+          - name: db-backup-container
+            image: mysql:5.7
+            env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            command: ["sh", "-c", "mysqldump -h database.projet-groupe.svc.cluster.local -P 3306 -u 'root' -p$MYSQL_ROOT_PASSWORD --all-databases > /data/backup-$(date +\\%F-\\%T).sql"]
             volumeMounts:
             - mountPath: /data
               name: db-volume

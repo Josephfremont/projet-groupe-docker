@@ -34,6 +34,45 @@ DB_HOST=localhost
 DB_PORT=3306
 ```
 
+# Création des jobs
+kubectl apply -f job.yaml
+kubectl apply -f cronjob.yaml
+
+# Vérification des fichiers SQL créés par les jobs
+
+## Vérification de l'existence des jobs et cronjobs
+kubectl get jobs -n projet-groupe
+kubectl get cronjobs -n projet-groupe
+
+## Création d'un pod temporaire pour check le volume
+kubectl apply -f pod_check_backup.yaml
+
+## Vérification du contenu du volume
+kubectl exec -it volume-inspect -n projet-groupe -- sh
+cd /data
+ls -l
+
+## Suppression du pod temporaire
+kubectl delete -f pod_check_backup.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Installation des dépendances
 
 ```bash
