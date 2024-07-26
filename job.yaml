@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-job
+spec:
+  template:
+    metadata:
+      name: db-job
+    spec:
+      containers:
+      - name: db-container
+        image: busybox
+        command: ["sh", "-c", "echo 'Message écrit à l'éxécution du Job' > /data/message.txt"]
+        volumeMounts:
+        - mountPath: /data
+          name: db-volume
+      restartPolicy: Never
+      volumes:
+      - name: db-volume
+        persistentVolumeClaim:
+          claimName: db-volume-claim
