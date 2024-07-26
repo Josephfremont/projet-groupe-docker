@@ -1,4 +1,17 @@
 apiVersion: v1
+kind: Service
+metadata:
+  name: database
+  namespace: projet-groupe
+spec:
+  selector:
+    app: database
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: database
@@ -8,7 +21,7 @@ metadata:
 spec:
   containers:
   - name: database-container
-    image: mysql
+    image: mysql:9.0.1
     env:
     - name: MYSQL_ROOT_PASSWORD
       value: root
@@ -22,3 +35,39 @@ spec:
   - name: db-volume
     persistentVolumeClaim:
       claimName: db-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin
+  namespace: projet-groupe
+spec:
+  selector:
+    app: phpmyadmin
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: phpmyadmin
+  namespace: projet-groupe
+  labels:
+    app: phpmyadmin
+spec:
+  containers:
+  - name: phpmyadmin-container
+    image: phpmyadmin/phpmyadmin:5.2.1
+    env:
+    - name: PMA_HOST
+      value: database
+    - name: PMA_PORT
+      value: "3306"
+    - name: MYSQL_ROOT_PASSWORD
+      value: root
+    ports:
+    - containerPort: 80
+      name: http
