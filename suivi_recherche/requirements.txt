@@ -1,0 +1,10 @@
+Django
+djangorestframework
+mysqlclient
+django-cors-headers
+drf-yasg
+requests
+setuptools
+django-debug-toolbar
+python-dotenv
+django-filter

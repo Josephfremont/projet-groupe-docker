@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Publication : {{ publication.title }}{% endblock %}
+
+{% block content %}
+<h2>Publication : {{ publication.title }}</h2>
+<a href="{% url 'research_frontend:delete_publication' publication.id %}" class="btn btn-del">Supprimer la publication</a>
+<a href="{% url 'research_frontend:update_publication' publication.id %}" class="btn btn-edit">Modifier la publication</a>
+<p>{{ publication.description }}</p>
+<p>Date de publication : {{ publication.publication_date }}</p>
+<p>Recherche : <a href="{% url 'research_frontend:research' publication.research.id %}">{{ publication.research.title }}</a></p>
+{% endblock %}

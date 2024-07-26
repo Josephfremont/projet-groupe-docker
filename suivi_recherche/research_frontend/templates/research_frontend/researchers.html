@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Chercheurs{% endblock %}
+
+{% block content %}
+<h2>Liste des Chercheurs</h2>
+<ul>
+    {% for researcher in researchers %}
+    <li>
+        <a href="{% url 'research_frontend:researcher' researcher.id %}">{{ researcher.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'research_frontend:create_researcher' %}" class="btn btn-add">Créer un chercheur</a>
+{% endblock %}

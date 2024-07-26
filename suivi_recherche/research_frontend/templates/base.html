@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Suivi de Recherche{% endblock %}</title>
+    {% block extra_head %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Suivi de Recherche</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'research_frontend:home' %}">Accueil</a></li>
+                <li><a href="{% url 'research_frontend:researches' %}">Recherches</a></li>
+                <li><a href="{% url 'research_frontend:researchers' %}">Chercheurs</a></li>
+                <li><a href="{% url 'research_frontend:publications' %}">Publications</a></li>
+                <li><a href="{% url 'research_frontend:filter' %}">Filtre</a></li>
+                <li><a href="{% url 'research_frontend:visualization' %}">Visualisation</a></li>
+                <li><a href="{% url 'research_frontend:chatbot' %}">ChatBot IA</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2020 - Suivi de Recherche</p>
+    </footer>
+    {% block extra_body %}{% endblock %}
+</body>
+</html>

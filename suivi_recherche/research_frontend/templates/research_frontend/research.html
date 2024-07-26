@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Recherche : {{ research.title }}{% endblock %}
+
+{% block content %}
+<h2>Recherche : {{ research.title }}</h2>
+<a href="{% url 'research_frontend:delete_research' research.id %}" class="btn btn-del">Supprimer la recherche</a>
+<a href="{% url 'research_frontend:update_research' research.id %}" class="btn btn-edit">Modifier la recherche</a>
+<p>{{ research.description }}</p>
+<p>Date de début : {{ research.start_date }}</p>
+<p>Date de fin prévue : {{ research.end_date }}</p>
+<p>Chercheur : <a href="{% url 'research_frontend:researcher' research.researcher.id %}">{{ research.researcher.name }}</a></p>
+
+{% endblock %}

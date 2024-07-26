@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier la publication{% endblock %}
+
+{% block content %}
+<h2>Modifier la publication</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="title">Titre</label>
+    <input type="text" name="title" id="title" value="{{ publication.title }}">
+    <label for="summary">Résumé</label>
+    <textarea name="summary" id="summary">{{ publication.summary }}</textarea>
+    <label for="publication_date">Date de publication</label>
+    <input type="date" name="publication_date" id="publication_date" value="{{ publication.publication_date }}">
+    <label for="research">Recherche</label>
+    <select name="research" id="research" value="{{ publication.research.id }}">
+        {% for research in researches %}
+        <option value="{{ research.id }}">{{ research.title }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Créer</button>
+</form>
+{% endblock %}

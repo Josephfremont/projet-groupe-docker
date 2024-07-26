@@ -1,0 +1,142 @@
+# GET list of researches
+GET {{baseUrl}}/research/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# GET research by id
+GET {{baseUrl}}/research/1/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# POST create research
+POST {{baseUrl}}/research/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "title": "New research",
+    "description": "New research description",
+    "start_date": "2024-01-01",
+    "end_date": "2024-01-31",
+    "researcher": 1
+}
+
+###
+
+# PUT update research
+PUT {{baseUrl}}/research/1/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "title": "Updated research",
+    "description": "Updated research description",
+    "start_date": "2024-01-01",
+    "end_date": "2024-01-31",
+    "researcher": 1
+}
+
+###
+
+# PATCH update research
+PATCH {{baseUrl}}/research/1/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "description": "Partially updated research description"
+}
+
+###
+
+# DELETE research
+DELETE {{baseUrl}}/research/1/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# GET list of researchers
+GET {{baseUrl}}/researcher/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# GET researcher by id
+GET {{baseUrl}}/researcher/1/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# POST create researcher
+POST {{baseUrl}}/researcher/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "name": "John Smith",
+    "specialty": "Physique quantique",
+    "researches": []
+}
+
+###
+
+# DELETE researcher
+DELETE {{baseUrl}}/researcher/1/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# GET publications
+GET {{baseUrl}}/publication/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# GET publication by id
+GET {{baseUrl}}/publication/1/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# POST create publication
+POST {{baseUrl}}/publication/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "title": "New publication",
+    "summary": "New publication description",
+    "publication_date": "2024-01-01",
+    "research": 1
+}
+
+###
+
+# GET list of researches by researcher
+GET {{baseUrl}}/research/?researcher=1
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# GET list of publications by title
+GET {{baseUrl}}/publication/?title=New publication
+Content-Type: application/json
+Authorization: Token {{token}}
+
+###
+
+# GET list of researchers by specialty
+GET {{baseUrl}}/researcher/?specialty=Physique quantique
+Content-Type: application/jsons
+Authorization: Token {{token}}

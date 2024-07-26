@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Chercheur : {{ researcher.name }}{% endblock %}
+
+{% block content %}
+<h2>Chercheur : {{ researcher.name }}</h2>
+<a href="{% url 'research_frontend:delete_researcher' researcher.id %}" class="btn btn-del">Supprimer le chercheur</a>
+<a href="{% url 'research_frontend:update_researcher' researcher.id %}" class="btn btn-edit">Modifier le chercheur</a>
+<p>Spécialité : {{ researcher.specialty }}</p>
+<h3>Recherches</h3>
+<ul>
+    {% for research in researcher.researches %}
+    <li>
+        <a href="{% url 'research_frontend:research' research.id %}">{{ research.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Recherches{% endblock %}
+
+{% block content %}
+
+<h2>Liste des Recherches</h2>
+<ul>
+    {% for research in researches %}
+    <li>
+        <a href="{% url 'research_frontend:research' research.id %}">{{ research.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'research_frontend:create_research' %}" class="btn btn-add">Créer une recherche</a>
+{% endblock %}

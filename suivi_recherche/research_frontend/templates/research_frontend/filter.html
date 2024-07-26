@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Filtre{% endblock %}
+
+{% block content %}
+<h2>Filtre</h2>
+<form method="GET" action="{% url 'research_frontend:filter' %}">
+	<label for="title">Titre</label>
+	<input type="text" id="title" name="title" />
+
+	<label for="start_date">Date de début</label>
+	<input type="date" id="start_date" name="start_date" />
+
+	<label for="researcher">Chercheur</label>
+	<select id="researcher" name="researcher">
+		<option value="">---</option>
+		{% for researcher in researchers %}
+		  <option value="{{ researcher.id }}">{{ researcher.name }}</option>
+		{% endfor %}
+	</select>
+
+	<button type="submit">Filtrer</button>
+</form>
+
+{% endblock %}

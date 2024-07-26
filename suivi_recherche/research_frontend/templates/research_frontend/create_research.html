@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Créer une recherche{% endblock %}
+
+{% block content %}
+<h2>Créer une recherche</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="title">Titre</label>
+    <input type="text" name="title" id="title">
+    <label for="description">Description</label>
+    <textarea name="description" id="description"></textarea>
+    <label for="start_date">Date de début</label>
+    <input type="date" name="start_date" id="start_date">
+    <label for="end_date">Date de fin prévue</label>
+    <input type="date" name="end_date" id="end_date">
+    <label for="researcher">Chercheur</label>
+    <select name="researcher" id="researcher">
+        {% for researcher in researchers %}
+        <option value="{{ researcher.id }}">{{ researcher.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Créer</button>
+</form>
+{% endblock %}
