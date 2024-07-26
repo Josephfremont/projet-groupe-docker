@@ -86,6 +86,8 @@ WSGI_APPLICATION = 'suivi_recherche.wsgi.application'
 
 load_dotenv()
 
+print(os.getenv('DB_NAME')+ " " +os.getenv('DB_USER')+ " " +os.getenv('DB_PASSWORD')+ " " +os.getenv('DB_HOST')+ " " +os.getenv('DB_PORT'))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
