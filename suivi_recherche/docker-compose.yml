@@ -12,35 +12,31 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: suivi_recherche
+    volumes:
+      - db-data:/var/lib/mysql
   djangoapp:
-    image: lebatoudu58/djangoapp:latest
-    
-    # ou
-    # build:
-    #   context: .
-    #   dockerfile: dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
 
-    command: python manage.py runserver
-
-
-    # volumes:
-    #   - ./back:/usr/share/nginx/html
+    command: sh /app/entrypoint.sh
 
     environment:
-      - DB_HOST=localhost
+      - DB_HOST=db
       - DB_USER=root
       - DB_PASSWORD=root
-      - DB_NAME= suivi_recherche
+      - DB_NAME=suivi_recherche
+      - DB_PORT=3306
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@admin.fr
 
     depends_on:
       db:
         condition: service_healthy
 
+volumes:
+  db-data:
   
-#     volumes:
-#       - db-data:/mysql
-
-# volumes:
-#   db-data:
