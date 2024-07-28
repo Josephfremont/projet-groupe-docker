@@ -1,137 +1,58 @@
-# td-djangorestapi-GUILLET-SIMON
-TP Django RESTAPI
+# TP-Groupe-Kubernetes
 
-## Installation
+## Prérequis
 
-### Prérequis
-
-- Python 3.8
-- Pip
-- Un serveur MySQL (ex: [Laragon](https://laragon.org/download/))
-
-### Installation de l'environnement virtuel
-
-```bash
-python -m venv venv
-venv\Scripts\activate # Windows
-source venv/bin/activate # Linux
-```
-
-### Configuration de la base de données
-    
-Créer une base de données MySQL nommée `suivi_recherche`.
-```sql
-CREATE DATABASE suivi_recherche;
-```
-
-Créer un fichier `.env` à la racine du projet avec les informations de connexion à la base de données.
-Le fichier `.env.example` est fourni en exemple.
-```env
-DB_NAME=suivi_recherche
-DB_USER=root
-DB_PASSWORD=
-DB_HOST=localhost
-DB_PORT=3306
-```
-
-# Création des jobs
-kubectl apply -f job.yaml
-kubectl apply -f cronjob.yaml
-
-# Vérification des fichiers SQL créés par les jobs
-
-## Vérification de l'existence des jobs et cronjobs
-kubectl get jobs -n projet-groupe
-kubectl get cronjobs -n projet-groupe
-
-## Création d'un pod temporaire pour check le volume
-kubectl apply -f pod_check_backup.yaml
-
-## Vérification du contenu du volume
-kubectl exec -it volume-inspect -n projet-groupe -- sh
-cd /data
-ls -l
-
-## Suppression du pod temporaire
-kubectl delete -f pod_check_backup.yaml
+- Docker
+- Kubertes
 
 
+## Ajout de la base de donnée et son volume (attendre 10 sec entre chaques commandes)
+`kubectl apply -f db.yaml`<br>
+`kubectl apply -f dbVolume.yaml`
 
+## Lancement du service (attendre 10 sec entre chaques commandes)
 
+`kubectl apply -f djangoservice.yml`
 
+## Déploiement (attendre 10 sec entre chaques commandes)
 
+`kubectl apply -f djangoapppoddeploy.yml`
 
+## Création des jobs
 
+`kubectl apply -f job.yaml`<br>
+`kubectl apply -f cronjob.yaml`
 
+## Vérification des fichiers SQL créés par les jobs
 
+### Vérification de l'existence des jobs et cronjobs
 
+`kubectl get jobs -n projet-groupe`<br>
+`kubectl get cronjobs -n projet-groupe`
 
+### Création d'un pod temporaire pour check le volume
 
+`kubectl apply -f pod_check_backup.yaml`
 
+### Vérification du contenu du volume
 
+`kubectl exec -it volume-inspect -n projet-groupe -- sh`<br>
+`cd /data`<br>
+`ls -l`
 
+### Suppression du pod temporaire
 
+`kubectl delete -f pod_check_backup.yaml`
 
+## Accéder au déploiement
+### Retourne l'adresse ip et le port du site web {url:port}
+`minikube service externaldjangoapp -n projet-groupe`
 
-### Installation des dépendances
+## Accès
 
-```bash
-pip install --no-cache-dir -r requirements.txt
-```
-
-### Lancement des migrations
-
-```bash
-python manage.py migrate
-```
-
-## Utilisation
-
-### Lancement du serveur
-
-```bash
-python manage.py runserver
-```
-
-### Création d'un super utilisateur
-
-```bash
-python manage.py createsuperuser
-```
-
-### Création d'un token pour un utilisateur
-
-```bash
-python manage.py drf_create_token <username>
-```
-
-### Ajouter le token d'accès à l'API dans le fichier `.env`
-
-```env
-API_TOKEN=f8f0d32f6d47cbc3f766b5eede8a453d63e4ddcb
-```
-
-### Configuration des tests
-
-- Installer l'extension [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) pour Visual Studio Code.
-- Créer un fichier `.vscode/settings.json` à la racine du projet avec les informations suivantes :
-```json
-{
-    "rest-client.environmentVariables": {
-        "$shared": {
-            "baseUrl": "http://localhost:8000/api",
-            "token": "<token>"
-        },
-    }
-}
-```
-
-
-### Accès
-
-- Le site : [http://127.0.0.1:8000/](http://127.0.1:8000/)
-- Le panel d'adminitration : [http://127.0.0.1:8000/admin/](http://127.0.1:8000/admin/)
-- L'API : [http://127.0.0.1:8000/api/](http://127.0.1:8000/api/)
-- La documentation : [http://127.0.0.1:8000/api/redoc/](http://127.0.0.1:8000/api/redoc/)
-- Le Swagger : [http://127.0.0.1:8000/api/schema/](http://127.0.1:8000/api/schema/)
+- Le site : http://127.0.0.1:{port}/
+- Le panel d'adminitration : http://127.0.0.1:{port}/admin/
+- L'API : http://127.0.0.1:{port}/api/
+- La documentation : http://127.0.0.1:{port}/api/redoc/
+- Le Swagger : http://127.0.0.1:{port}/api/schema/
 
