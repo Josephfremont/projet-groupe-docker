@@ -18,6 +18,14 @@
 
 `kubectl apply -f djangoapppoddeploy.yml`
 
+## Accéder au déploiement
+### Retourne l'adresse ip et le port du site web {127.0.0.1:port}
+`minikube service externaldjangoapp -n projet-groupe`
+
+## Accéder au phpmyadmin
+### Retourne l'adresse ip et le port de phpmyadmin {127.0.0.1:port} (les identifiants sont root et root)
+`minikube service phpmyadmin -n projet-groupe`
+
 ## Création des jobs
 
 `kubectl apply -f job.yaml`<br>
@@ -43,10 +51,6 @@
 ### Suppression du pod temporaire
 
 `kubectl delete -f pod_check_backup.yaml`
-
-## Accéder au déploiement
-### Retourne l'adresse ip et le port du site web {url:port}
-`minikube service externaldjangoapp -n projet-groupe`
 
 ## Accès
 
