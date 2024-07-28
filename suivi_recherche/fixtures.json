@@ -1,0 +1,32 @@
+[
+    {
+        "model": "research.research",
+        "pk": 1,
+        "fields": {
+            "title": "Research on AI",
+            "description": "A comprehensive study on artificial intelligence.",
+            "start_date": "2023-01-01",
+            "end_date": "2023-12-31",
+            "researcher": 1
+        }
+    },
+    {
+        "model": "research.researcher",
+        "pk": 1,
+        "fields": {
+            "name": "John Doe",
+            "specialty": "Artificial Intelligence",
+            "research": [1]
+        }
+    },
+    {
+        "model": "research.publication",
+        "pk": 1,
+        "fields": {
+            "title": "AI in 2023",
+            "summary": "An overview of AI advancements in 2023.",
+            "publication_date": "2023-06-01",
+            "research": 1
+        }
+    }
+]

@@ -1,0 +1,42 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: suivi_recherche
+    volumes:
+      - db-data:/var/lib/mysql
+  djangoapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+
+    command: sh /app/entrypoint.sh
+
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=suivi_recherche
+      - DB_PORT=3306
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@admin.fr
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:
+  
