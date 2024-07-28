@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: djangoapp-deployment
+  labels:
+    app: djangoapp-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: djangoapppod
+  template:
+    metadata:
+      labels:
+        app: djangoapppod
+    spec:
+      containers:
+      - name: djangoappcontainer
+      image: lebatoudu58/djangoapp:latest
+      ports:
+      - containerPort: 8000

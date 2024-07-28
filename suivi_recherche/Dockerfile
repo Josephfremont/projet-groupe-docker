@@ -14,4 +14,5 @@ EXPOSE 8000
 
 ENV PYTHONUNBUFFERED=1
 
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+CMD [ "sh", "/app/entrypoint.sh" ]
+# CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
