@@ -2,20 +2,40 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: djangoapp-deployment
+  namespace: projet-groupe
   labels:
     app: djangoapp-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: djangoapppod
+      app: djangoapp-deployment
   template:
     metadata:
       labels:
-        app: djangoapppod
+        app: djangoapp-deployment
     spec:
       containers:
       - name: djangoappcontainer
-      image: lebatoudu58/djangoapp:latest
-      ports:
-      - containerPort: 8000
+        image: lebatoudu58/djangoapp:latest
+        env:
+        - name: DB_HOST
+          value: database
+        - name: DB_USER
+          value: root
+        - name: DB_PASSWORD
+          value: root
+        - name: DB_NAME
+          value: suivi_recherche
+        - name: DB_PORT
+          value: "3306"
+        - name: DJANGO_SUPERUSER_USERNAME
+          value: admin
+        - name: DJANGO_SUPERUSER_PASSWORD
+          value: admin
+        - name: DJANGO_SUPERUSER_EMAIL
+          value: admin@admin.fr
+
+        command: ["sh", "/app/entrypoint.sh"]
+        ports:
+          - containerPort: 8000
