@@ -11,7 +11,7 @@ spec:
     image: lebatoudu58/djangoapp:latest
     env:
     - name: DB_HOST
-      value: db
+      value: database
     - name: DB_USER
       value: root
     - name: DB_PASSWORD
@@ -27,6 +27,6 @@ spec:
     - name: DJANGO_SUPERUSER_EMAIL
       value: admin@admin.fr
 
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: ["sh", "/app/entrypoint.sh"]
     ports:
       - containerPort: 8000

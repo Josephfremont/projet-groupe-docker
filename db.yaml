@@ -25,6 +25,8 @@ spec:
     env:
     - name: MYSQL_ROOT_PASSWORD
       value: root
+    - name: MYSQL_DATABASE
+      value: suivi_recherche
     ports:
     - containerPort: 3306
       name: mysql
